@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客管理</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+<nav class="ui m-bg attached segment m-padded-tb-mini m-shadow-small animated fadeInDown" style="z-index: 999!important;">
+    <div class="ui container">
+        <div class="ui secondary stackable menu">
+            <h2 class="ui teal header item">管理后台</h2>
+            <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide m-black"><i class="home icon"></i>博客</a>
+            <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide m-black"><i class="idea icon"></i>分类</a>
+            <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide m-black"><i class="tags icon"></i>标签</a>
+            <a href="#" th:href="@{/admin/friendlinks}" class="active m-item item m-mobile-hide"><i class="pencil icon"></i>友链管理</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown  item">
+                    <div class="text">
+                        <img class="ui avatar image" src="http://rf479zmaa.hn-bkt.clouddn.com/avatar.jpg"
+                             th:src="@{${session.user.avatar}}">
+                        <span th:text="${session.user.nickname}">Kindnit</span>
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" th:href="@{/logout}" class="item">注销</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/friendlinks/input}" class=" item">新增</a>
+            <a href="#" th:href="@{/admin/friendlinks}" class="teal active item">列表</a>
+        </div>
+    </div>
+</div>
+
+<!--中间内容-->
+<div class="m-container m-padded-tb-big">
+    <!--ui提供的container:提供的宽度固定，显示最好的显示效果-->
+    <div class="ui container">
+        <!--查询表单需要是form提交数据-->
+        <!--            <form th:action="@{/admin/blogs/search}" method="post" class="ui segment form">-->
+        <div class="ui secondary segment form">
+            <!-- <input type="hidden" name="page">&lt;!&ndash;inline:不让它全部占满，占一行的效果、placeholder:里面的文字&ndash;&gt;-->
+            <input type="hidden" name="pageNum">
+            <div class="inline fields">
+                <div class="field">
+                    <input type="text" name="title" placeholder="友链名称">
+                </div>
+                <div class="field">
+                    <button  type="submit" id="search-btn" class="ui mini purple basic button"><i class="search icon"></i>搜索</button>
+                </div>
+            </div>
+            <!--   </form>-->
+        </div>
+
+        <div id="table-container">
+            <!--celled:网格线、table:ui的表格、compact:让表格紧缩-->
+            <table class="ui compact teal table">
+                <thead>
+                <tr align="center">
+                    <th>ID</th>
+                    <th>博客名称</th>
+                    <th>博客地址</th>
+                    <th>图片地址</th>
+                    <th>添加时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align="center" th:each="friendlink,iterStat : ${pageInfo.list}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${friendlink.blogname}">ONESTAR</td>
+                    <td th:text="${friendlink.blogaddress}">https://onestar.newstar.net.cn/</td>
+                    <td th:text="${friendlink.pictureaddress}">http://122.51.28.187:8080/</td>
+                    <td th:text="${#dates.format(friendlink.createTime,'yyyy-MM-dd HH:mm')}">2022-07-15 09:45</td>
+                    <!--th:text="${#dates.format(message.createTime,'yyyy-MM-dd HH:mm')}"-->
+                    <td>
+                        <a href="#" th:href="@{/admin/friendlinks/{id}/input(id=${friendlink.id})}" class="ui mini teal basic button">编辑</a>
+                        <a href="#" th:href="@{/admin/friendlinks/{id}/delete(id=${friendlink.id})}" onclick="return confirm('确定要删除该友链吗？三思啊! 删了可就没了！')" class="ui mini red basic button">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <!--colspan:有7列；合并一下-->
+                    <th colspan="7">
+                        <div class="ui mini pagination menu">
+                            <a class="item" th:href="@{${href}}">首页</a>
+                            <a onclick="page(this)" th:attr="data-page=${pageInfo.pageNum}-1" class="item" style="color: skyblue;">
+                                上一页
+                            </a>
+                            <a onclick="page(this)" th:each="p : ${pageInfo.navigatepageNums}"
+                               th:attr="data-page=${p}"
+                               th:text="${p}" class="item"
+                               th:classappend="${pageInfo.pageNum}==${p}? 'active'">1</a>
+                            <a onclick="page(this)" th:attr="data-page=${pageInfo.pageNum}+1" class="item" style="color: skyblue;" >
+                                下一页
+                            </a>
+                            <a  class="item" th:href="@{${href}(pageNum=${pageInfo.pages})}">尾页</a>
+                        </div>
+                        <div class="ui mini segment m-inline-block">
+                            <p >当前第<span th:text="${pageInfo.pageNum}"></span>页，总<span th:text="${pageInfo.pages}"></span>页，共<span th:text="${pageInfo.total}"></span>条记录</p>
+                        </div>
+                        <!--right floated:往右浮动-->
+                        <a href="#" th:href="@{/admin/friendlinks/input}" class="ui mini right floated teal basic button">新增</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}" >
+                <i class="close icon"></i>
+                <div class="header">提示：</div>
+                <p>恭喜，操作成功！</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br>
+<br>
+<!--底部footer-->
+<!--vertical:垂直,无圆角,m-padded-tb-massive:自定义宽度-->
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <!--center aligned:居中、ui提供的container:提供的宽度固定-->
+    <div class="ui center aligned container">
+        <!--grid:分成16份、divided:分割的线、stackable:可堆叠,屏幕小的时候会堆叠到一块,用于适应移动端网页适配-->
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <!--rounded:圆角的-->
+                        <img src="../../static/images/WeChat.jpg" class="ui rounded image" alt="" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                    <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                    <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item m-text-thin">Email：10086@qq.com</a>
+                    <a href="#" class="item m-text-thin">QQ：10086</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced ">Kindnit</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+            </div>
+        </div>
+        <!--section divider:底部的线-->
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2022 - 2023 Kindnit Designed by Kindnit</p>
+    </div>
+
+</footer>
+
+<!--通过CDN引入Semantic-UI(也可通过本地下载引入)-->
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script>
+    //<!--jQuery获取这个元素-->
+    $('.menu.toggle').click(function () {//toggleClass开关一样的样式
+        $('.m-item').toggleClass('m-mobile-hide');//m-item:获取那几个列表，点击的时候处理m-mobile-hide
+    });
+    //<!--jQuery:按钮之后触发，执行JS组件-->
+    // $('#payButton').popup({         //获得按钮、.popup:没有为什么，调用组件
+    //     popup : $('.payQR.popup'),  //拿到二维码对象，定位到这个元素
+    //     //on : 'click',               //点击的时候触发
+    //     position: 'bottom center'   //position位置：在中下的位置触发
+    // });
+    $('.ui.dropdown').dropdown({        //鼠标放上去就会出现下拉
+        on : 'hover'                    //默认是点击，hover鼠标放上去就出来
+    });
+
+
+    //消息提示关闭初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+    function page(obj) {
+        $("[name='pageNum']").val($(obj).data("page"));//获取page隐含域赋值
+        loaddata();
+    }
+
+    // 点击事件；page清零，搜索不会查询某一页
+    $("#search-btn").click(function () {
+        // $("[name='page']").val(0);
+        loaddata();
+    });
+
+    //用来请求发送数据
+    function loaddata() {
+        $("#table-container").load(/*[[@{/admin/friendlinks/search}]]*/"/admin/friendlinks/search",{
+            title : $("[name='title']").val(),
+            pageNum : $("[name='pageNum']").val()
+        });
+    }
+</script>
+</body>
+</html>

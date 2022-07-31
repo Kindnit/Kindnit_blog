@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端预览-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>归档</title>
+    <!--通过CDN引入Semantic-UI-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+    <!--导航-->
+    <!--inverted:反色、attached:没有圆角，依附在上面:m-padded-tb-mini:m自己定义,padded,上下之间内部间隔,tb上下,mini小点-->
+    <!--m-shadow-small:自定义导航阴影-->
+    <nav th:replace="_fragments :: menu(4)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <!--ui提供的container:提供的宽度固定-->
+        <div class="ui container">
+            <!--stackable:可堆叠,屏幕小的时候会堆叠到一块,用于适应移动端网页适配-->
+            <div class="ui inverted secondary stackable menu">
+                <!--teal颜色header-->
+                <h2 class="ui teal header item">CodeSleep</h2>
+                <!--home icon:图标、m-mobile-hide:自定义按钮隐藏-->
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+                <!--active:当前活跃-->
+                <a href="#" class="active m-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini info icon"></i>关于我</a>
+                <!--right:靠右-->
+                <div class="right  m-item item m-mobile-hide ">
+                    <!--可以加transparent:透明-->
+                    <div class="ui icon input">
+                        <input type="text" placeholder="Search....">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--m-right-top:自定义绝对位置布局、m-mobile-show:自定义按钮显示、menu toggle:没有任何显示上的意义,只是为了用jQuery获取这个元素(在最底部script)-->
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--时间轴内容-->
+    <div id="waypoint" class="m-container-small m-padded-tb-super ">
+        <div class="doc-container m-padded-tb-massivex m-opacity" id="doc-container">
+            <th:block >
+                <section class="timeline">
+                    <ul>
+
+                        <li class="" th:each="blog : ${blogs}">
+                            <div>
+                                <time th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020/01/01</time>
+                                <div class="scientist" >
+                                    <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
+                                        <h3 class="state" style="text-align:center;font-size: 16px;color: #000;" th:text="${blog.title}">文章标题</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </section>
+            </th:block>
+        </div>
+    </div>
+
+
+    <!--右侧工具栏-->
+    <div id="toolbar" class="m-padded topButton m-fixed m-right-bottom" style="display: none">
+        <div class="ui vertical icon buttons ">
+            <!--chevron up：向上的小图片-->
+            <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!--底部footer-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+        <div class="ui center aligned container">
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <img src="../static/images/wechat.jpg" class="ui rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                        <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                        <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">Email：someone@163.com</a>
+                        <a href="#" class="item m-text-thin">QQ：10086</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+                </div>
+            </div>
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2022 - 2023 Kindnit Designed by Kindnit</p>
+        </div>
+
+    </footer>
+
+    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <!--/*/</th:block>/*/-->
+
+    <script>
+        //<!--jQuery获取这个元素-->
+        $('.menu.toggle').click(function () {//toggleClass开关一样的样式
+            $('.m-item').toggleClass('m-mobile-hide');//m-item:获取那几个列表，点击的时候处理m-mobile-hide
+        });
+        //<!--jQuery:按钮之后触发，执行JS组件-->
+        // $('#payButton').popup({         //获得按钮、.popup:没有为什么，调用组件
+        //     popup : $('.payQR.popup'),  //拿到二维码对象，定位到这个元素
+        //     //on : 'click',               //点击的时候触发
+        //     position: 'bottom center'   //position位置：在中下的位置触发
+        // });
+        //滚动侦测JS，根据滚动的位置显示
+        var waypoint = new Waypoint({
+            element: document.getElementById('waypoint'),   //监测对象
+            handler: function(direction) {                  //当滚动的时候触发；direction；方向，模板里直接用
+                if (direction == 'down') {                  //(direction == 'down')向下滚动；control里可以看
+                    $('#toolbar').show(100);
+                } else {
+                    $('#toolbar').hide(500);
+                }
+                console.log('Scrolled to waypoint!  ' + direction);
+            }
+        })
+        //点击的时候调用平滑滚动里的方法
+        $('#toTop-button').click(function () {
+            $(window).scrollTo(0,500);      //0最顶端，500速度
+        });
+    </script>
+
+</body>
+</html>

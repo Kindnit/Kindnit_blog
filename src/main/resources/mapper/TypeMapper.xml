@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kindnit.dao.TypeMapper">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+
+    <!--查询所有类型-->
+    <select id="getAdminType" resultType="Type">
+        select *
+        from t_type
+    </select>
+
+    <!--增加分类-->
+    <insert id="saveType" parameterType="Type">
+        insert into t_type
+        values (#{id}, #{name})
+    </insert>
+
+    <!--根据名称查询类型-->
+    <select id="getTypeByName" resultType="Type">
+        select *
+        from t_type where name = #{name}
+    </select>
+
+    <!--根据名Id查询类型-->
+    <select id="getTypeById" resultType="Type">
+        select *
+        from t_type where id = #{id}
+    </select>
+
+    <!--删除类型-->
+    <delete id="deleteType" >
+        delete from t_type where id = #{id}
+    </delete>
+
+    <!--更新类型-->
+    <update id="updateType" parameterType="Type">
+        update t_type set name = #{name} where id = #{id};
+    </update>
+
+    <!--两个id可能会相冲，取别名即可-->
+    <resultMap id="types" type="Type">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="Blog">
+            <id property="id" column="bid"/>
+            <result property="title" column="title"/>
+            <result property="typeId" column="type_id"/>
+        </collection>
+    </resultMap>
+
+    <!--查询首页标签-->
+    <select id="getAllType" resultMap="types">
+        select t.id tid, t.name, b.id bid, b.title,b.type_id
+        from t_type t,t_blog b
+        where t.id = b.type_id
+    </select>
+
+    <!--首页的显示标签-->
+    <select id="findTypeListBefore" parameterType="int" resultMap="types">
+        select t.id tid, t.name, b.id bid, b.title,b.type_id
+        from t_type t,t_blog b
+        where t.id = b.type_id
+          and published = 1
+        order by b.update_time desc limit 0,${size}
+    </select>
+
+</mapper>

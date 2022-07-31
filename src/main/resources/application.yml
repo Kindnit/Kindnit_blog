@@ -1,0 +1,15 @@
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  messages:
+    basename: i18n/messages
+
+comment.avatar: https://s1.ax1x.com/2022/08/01/vkUEes.png
+
+

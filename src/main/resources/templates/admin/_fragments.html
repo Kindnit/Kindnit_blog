@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:replace="${title}">博客详情</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../../static/lib/editormd/css/editormd.min.css" th:href="@{/lib/editormd/css/editormd.min.css}">
+  <link rel="stylesheet" href="../../static/css/me.css" th:href="@{/css/me.css}">
+  <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+  <link rel="stylesheet" href="../../static/lib/Aplayer/APlayer.min.css" th:href="@{/lib/Aplayer/APlayer.min.css}">
+</head>
+<body>
+
+<!--导航-->
+<nav th:fragment="menu(n)" class="ui m-bg attached segment m-padded-tb-mini m-shadow-small animated fadeInDown" >
+  <div class="ui container">
+    <div class="ui secondary stackable menu">
+      <h2 class="ui teal header item">管理后台</h2>
+      <a href="#" th:href="@{/admin/blogs}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="home icon"></i>博客</a>
+      <a href="#" th:href="@{/admin/types}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="idea icon"></i>分类</a>
+      <a href="#" th:href="@{/admin/tags}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="tags icon"></i>标签</a>
+      <a href="#" th:href="@{/admin/friendlinks}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="pencil alternate icon"></i>友链管理</a>
+      <div class="right m-item m-mobile-hide menu">
+        <div class="ui dropdown item">
+          <div class="text">
+            <img class="ui avatar image" src="http://rf479zmaa.hn-bkt.clouddn.com/avatar.jpg" th:src="@{${session.user.avatar}}">
+            <span th:text="${session.user.nickname}">Kindnit</span>
+          </div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <a href="#" th:href="@{/logout}" class="item">注销</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+    <i class="sidebar icon"></i>
+  </a>
+</nav>
+
+
+<!--底部footer-->
+<footer th:fragment="footer" class="ui m-bg animated fadeInUp inverted vertical segment m-padded-tb-massive">
+  <div class="ui center aligned container">
+    <div class="ui inverted divided stackable grid">
+      <div class="three wide column">
+        <div class="ui inverted link list">
+          <div class="item">
+            <img src="../../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}"  class="ui rounded image" alt="" style="width: 110px">
+          </div>
+        </div>
+      </div>
+      <div class="three wide column" th:fragment="newblogList">
+        <h4 class="ui m-black inverted header m-text-thin m-text-spaced " >最新博客</h4>
+        <div >
+          <div class="ui inverted link list">
+            <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item m-black m-text-thin" th:each="blog : ${newblogs}" th:text="${blog.title}">用户故事（User Story）</a>
+            <!--/*-->
+            <a href="#" class="item m-black m-text-thin">用户故事（User Story）</a>
+            <a href="#" class="item m-black m-text-thin">用户故事（User Story）</a>
+            <!--*/-->
+          </div>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header m-text-thin m-text-spaced m-black ">联系我</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item m-black m-text-thin" th:text="#{index.email}">Email：someone@163.com</a>
+          <a href="#" class="item m-black m-text-thin" th:text="#{index.qq}">QQ：10086</a>
+        </div>
+      </div>
+      <div class="seven wide column">
+        <h4 class="ui inverted header m-black m-text-thin m-text-spaced">Blog</h4>
+        <p class="m-text-thin m-black m-text-spaced m-opacity-mini" th:text="#{index.blogDescription}">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+      </div>
+    </div>
+    <div class="ui inverted m-black section divider"></div>
+    <p class="m-text-thin m-black m-text-spaced m-opacity-tiny">Copyright © 2022 - <span>2023</span> Kindnit Designed by Kindnit</p>
+  </div>
+  <center>
+  <div class="m-black m-margin-top">
+    <span id="runtime_span"></span>
+    <script type="text/javascript">
+      function show_runtime() {
+      window.setTimeout("show_runtime()", 1000);
+      X = new Date("2022/07/15 8:00:00");
+      Y = new Date();
+      T = (Y.getTime() - X.getTime());
+      M = 24 * 60 * 60 * 1000;
+      a = T / M;
+      A = Math.floor(a);
+      b = (a - A) * 24;
+      B = Math.floor(b);
+      c = (b - B) * 60;
+      C = Math.floor((b - B) * 60);
+      D = Math.floor((c - C) * 60);
+      runtime_span.innerHTML = "本站已服务" + A + "天" + B + "小时" + C + "分" + D + "秒"
+    }
+    show_runtime();
+    </script>
+  </div>
+  </center>
+</footer>
+
+<th:block th:fragment="script">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+  <script src="../../static/lib/editormd/editormd.min.js" th:src="@{/lib/editormd/editormd.min.js}"></script>
+  <script src="../../static/live2d-widget/autoload.js" th:src="@{/live2d-widget/autoload.js}"></script>
+  <script src="../../static/lib/Aplayer/APlayer.min.js" th:src="@{/lib/Aplayer/APlayer.min.js}"></script>
+  <!-- require MetingJS -->
+  <script src="../../static/lib/Aplayer/Meting.min.js" th:src="@{/lib/Aplayer/Meting.min.js}"></script>
+  <script>
+    $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+  </script>
+  <!--音乐插件-->
+  <meting-js
+          server="tencent"
+          type="playlist"
+          id="8564699590"
+          fixed="true"
+          autoplay="false"
+          loop="all"
+          order="random"
+          preload="auto"
+          list-folded="ture"
+          list-max-height="500px"
+          lrc-type="0">
+  </meting-js>
+  <!-- 网页鼠标点击特效（爱心） -->
+  <script type="text/javascript">
+    ! function (e, t, a) {
+      function r() {
+        for (var e = 0; e < s.length; e++) s[e].alpha <= 0 ? (t.body.removeChild(s[e].el), s.splice(e, 1)) : (s[
+                e].y--, s[e].scale += .004, s[e].alpha -= .013, s[e].el.style.cssText = "left:" + s[e].x +
+                "px;top:" + s[e].y + "px;opacity:" + s[e].alpha + ";transform:scale(" + s[e].scale + "," + s[e]
+                        .scale + ") rotate(45deg);background:" + s[e].color + ";z-index:99999");
+        requestAnimationFrame(r)
+      }
+
+      function n() {
+        var t = "function" == typeof e.onclick && e.onclick;
+        e.onclick = function (e) {
+          t && t(), o(e)
+        }
+      }
+
+      function o(e) {
+        var a = t.createElement("div");
+        a.className = "heart", s.push({
+          el: a,
+          x: e.clientX - 5,
+          y: e.clientY - 5,
+          scale: 1,
+          alpha: 1,
+          color: c()
+        }), t.body.appendChild(a)
+      }
+
+      function i(e) {
+        var a = t.createElement("style");
+        a.type = "text/css";
+        try {
+          a.appendChild(t.createTextNode(e))
+        } catch (t) {
+          a.styleSheet.cssText = e
+        }
+        t.getElementsByTagName("head")[0].appendChild(a)
+      }
+
+      function c() {
+        return "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math
+                .random()) + ")"
+      }
+      var s = [];
+      e.requestAnimationFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e
+              .mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (e) {
+        setTimeout(e, 1e3 / 60)
+      }, i(
+              ".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"
+      ), n(), r()
+    }(window, document);
+  </script>
+</th:block>
+
+</body>
+</html>

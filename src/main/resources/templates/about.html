@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head  th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <!--移动端预览-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我</title>
+    <!--通过CDN引入Semantic-UI-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+    <!--导航-->
+    <!--inverted:反色、attached:没有圆角，依附在上面:m-padded-tb-mini:m自己定义,padded,上下之间内部间隔,tb上下,mini小点-->
+    <!--m-shadow-small:自定义导航阴影-->
+    <nav th:replace="_fragments :: menu(6)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+        <!--ui提供的container:提供的宽度固定-->
+        <div class="ui container">
+            <!--stackable:可堆叠,屏幕小的时候会堆叠到一块,用于适应移动端网页适配-->
+            <div class="ui inverted secondary stackable menu">
+                <!--teal颜色header-->
+                <h2 class="ui teal header item">CodeSleep</h2>
+                <!--home icon:图标、m-mobile-hide:自定义按钮隐藏-->
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>首页</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini idea icon"></i>分类</a>
+                <a herf="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>标签</a>
+                <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>归档</a>
+                <!--active:当前活跃-->
+                <a herf="#" class="active m-item item m-mobile-hide"><i class="mini info icon"></i>关于我</a>
+                <!--right:靠右-->
+                <div class="right item m-mobile-hide">
+                    <!--可以加transparent:透明-->
+                    <div class="ui icon input ">
+                        <input type="text" placeholder="Search....">
+                        <i class="search link icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--m-right-top:自定义绝对位置布局、m-mobile-show:自定义按钮显示、menu toggle:没有任何显示上的意义,只是为了用jQuery获取这个元素(在最底部script)-->
+        <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+            <i class="sidebar icon"></i>
+        </a>
+    </nav>
+
+    <!--中间内容-->
+    <div id="waypoint" class="m-container-small m-padded-tb-super animated fadeInUp" >
+        <!--ui提供的container:提供的宽度固定，显示最好的显示效果-->
+        <div class="ui container">
+
+            <div class="ui stackable grid">
+                <div class="eleven wide column animated rotateInDownLeft">
+<!--                    <div class="ui segment">-->
+<!--                        <img src="../static/images/aboutCodeSleep.jpg" th:src="@{/images/aboutCodeSleep.jpg}"  alt="" class="ui rounded image" style="width: 800px;height: 600px">-->
+<!--                    </div>-->
+                    <div class="ui attached segment">
+                        <p class="m-text">总算是完结了，接下来再完善一下吧！</p>
+                        <br>
+                        <p class="m-text">这是我的第一个个人网站，虽然说还没上线，说不定之后会上线呢</p>
+                        <br>
+                        <br>
+                        <br>
+
+                        <p class="m-text">这个网站是从0开始搭建的，并且我这个个人博客我会一直坚持下去的，也会一直往技术方面走，因为如果单纯为了做博客而用一站式建站，没有什么意义。</p>
+                        <p class="m-text">这个博客借鉴了很多大佬的代码设计，感谢各位大佬的开源~</p>
+                        <p class="m-text">这个博客的内容和功能还不是特别完善，功能有局限性，希望未来将这个博客做得更加成熟更加完美。</p>
+                        <p class="m-text">这个友链页面就丑的一些，希望大家自我发挥狠狠改。</p>
+
+                        <br>
+
+                        <h2>About my blog</h2>
+                        <br>
+                        <p class="m-text">域 名： 创建于2022年07月15日&nbsp;</p>
+                        <br>
+                        <p class="m-text">服务器：说不定用阿里云服务器&nbsp;</p>
+                        <br>
+                        <p class="m-text">备案号：没呢 </p>
+                        <br>
+                        <p class="m-text">程 序： Spring哇</p>
+                    </div>
+                </div>
+                <div class="five wide column animated rotateInDownRight">
+                    <div class="ui top attached segment">
+                        <div class="ui center aligned header">关于我</div>
+                    </div>
+                    <div class="ui segment">
+                        <img src="../static/images/bg.jpg" th:src="@{/images/bg.jpg}"  alt="" class="ui rounded image">
+                    </div>
+<!--                    <div class="ui attached segment">-->
+<!--                        <p class="m-text">一个99年的草根小白起步的独立开发者；一个终身学习者，一个想成为大佬的小白. 分享一些个人经验，本博客是自己通过代码构建的。前端html+框架，后端javaSping。 希望结识可以共同成长的小伙伴.</p>-->
+<!--                        <p class="m-text">热爱编程，喜欢折腾，正在探索高效学习编程技术的方法...</p>-->
+<!--                    </div>-->
+                    <div class="ui attached segment">
+                        <div class="ui orange basic left pointing label">编程</div>
+                        <div class="ui orange basic left pointing label">写作</div>
+                        <div class="ui orange basic left pointing label">思考</div>
+                        <div class="ui orange basic left pointing label">交友</div>
+                    </div>
+                    <div class="ui attached segment">
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">JavaScript</div>
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">Node</div>
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">React</div>
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">RN</div>
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">MYSQL</div>
+                        <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
+                    </div>
+                    <div class="ui attached segment">
+                        <a href="#" class="ui circular icon button"><i class="github icon"></i></a>
+                        <a href="#" class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+                        <!--qq:鼠标移上去会显示、data-position:往下面弹出来-->
+                        <a href="#" class="ui qq circular icon button" data-content="10086" data-position="bottom center"><i class="qq icon"></i></a>
+                    </div>
+                    <!--flowing popup transition hidden:框架赞赏的时候隐藏显示-->
+                    <div class="ui wechat-qr flowing popup transition hidden">
+                        <img src="../static/images/WeChat.jpg" th:src="@{/images/WeChat.jpg}" alt="" class="ui rounded image" style="width: 110px">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--右侧工具栏-->
+    <div id="toolbar" class="m-padded topButton m-fixed m-right-bottom" style="display: none">
+        <div class="ui vertical icon buttons ">
+            <!--chevron up：向上的小图片-->
+            <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+    <!--底部footer-->
+    <!--vertical:垂直,无圆角,m-padded-tb-massive:自定义宽度-->
+    <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+        <!--center aligned:居中、ui提供的container:提供的宽度固定-->
+        <div class="ui center aligned container">
+            <!--grid:分成16份、divided:分割的线、stackable:可堆叠,屏幕小的时候会堆叠到一块,用于适应移动端网页适配-->
+            <div class="ui inverted divided stackable grid">
+                <div class="three wide column">
+                    <div class="ui inverted link list">
+                        <div class="item">
+                            <!--rounded:圆角的-->
+                            <img src="../static/images/WeChat.jpg" class="ui rounded image" alt="" style="width: 110px">
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced">最新博客</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                        <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                        <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+                    <div class="ui inverted link list">
+                        <a href="#" class="item m-text-thin">Email：10086@qq.com</a>
+                        <a href="#" class="item m-text-thin">QQ：10086</a>
+                    </div>
+                </div>
+                <div class="seven wide column">
+                    <h4 class="ui inverted header m-text-thin m-text-spaced ">Kindnit</h4>
+                    <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+                </div>
+            </div>
+            <!--section divider:底部的线-->
+            <div class="ui inverted section divider"></div>
+            <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2022/7 - 2022/7 Kindnit Designed by Kindnit</p>
+        </div>
+
+    </footer>
+
+    <!--通过CDN引入Semantic-UI(也可通过本地下载引入)-->
+    <!--/*/<th:block th:replace="_fragments :: script">/*/-->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+    <!--/*/</th:block>/*/-->
+
+    <script>
+        //<!--jQuery获取这个元素-->
+        $('.menu.toggle').click(function () {//toggleClass开关一样的样式
+            $('.m-item').toggleClass('m-mobile-hide');//m-item:获取那几个列表，点击的时候处理m-mobile-hide
+        });
+        //<!--jQuery:按钮之后触发，执行JS组件-->
+        // $('#payButton').popup({         //获得按钮、.popup:没有为什么，调用组件
+        //     popup : $('.payQR.popup'),  //拿到二维码对象，定位到这个元素
+        //     //on : 'click',               //点击的时候触发
+        //     position: 'bottom center'   //position位置：在中下的位置触发
+        // });
+        //滚动侦测JS，根据滚动的位置显示
+        var waypoint = new Waypoint({
+            element: document.getElementById('waypoint'),   //监测对象
+            handler: function(direction) {                  //当滚动的时候触发；direction；方向，模板里直接用
+                if (direction == 'down') {                  //(direction == 'down')向下滚动；control里可以看
+                    $('#toolbar').show(100);
+                } else {
+                    $('#toolbar').hide(500);
+                }
+                console.log('Scrolled to waypoint!  ' + direction);
+            }
+        })
+        //点击的时候调用平滑滚动里的方法
+        $('#toTop-button').click(function () {
+            $(window).scrollTo(0,500);      //0最顶端，500速度
+        });
+        $('.wechat').popup({                //获取wechat，鼠标控制他的时候发生事件
+            popup : $('.wechat-qr'),        //获取wechat-qr，弹出来
+            position: 'bottom center'       //position位置：在中下的位置触发
+        });
+        $('.qq').popup();
+    </script>
+
+</body>
+</html>

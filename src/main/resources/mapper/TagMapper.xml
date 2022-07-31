@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kindnit.dao.TagMapper">
+    <!--namespace根据自己需要创建的的mapper的路径和名称填写-->
+    <select id="getAdminTag" resultType="Tag">
+        select *
+        from t_tag
+    </select>
+
+    <insert id="saveTag" parameterType="Tag">
+        insert into t_tag
+        values (#{id}, #{name})
+    </insert>
+
+    <select id="getTagByName" resultType="Tag">
+        select *
+        from t_tag where name = #{name}
+    </select>
+
+    <select id="getTagById" resultType="Tag">
+        select *
+        from t_tag where id = #{id}
+    </select>
+
+    <delete id="deleteTag">
+        delete from t_tag where id = #{id}
+    </delete>
+
+    <update id="updateTag" parameterType="Tag">
+        update t_tag set name = #{name} where id = #{id};
+    </update>
+
+    <!--为防止与博客id混淆取别名-->
+    <resultMap id="tags" type="Tag">
+        <id property="id" column="tid"/>
+        <result property="name" column="name"/>
+        <collection property="blogs" ofType="Blog">
+            <id property="id" column="bid"/>
+            <result property="title" column="title"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAllTag" resultMap="tags">
+        select t.id tid,t.name,b.id bid,b.title
+        from t_tag t, t_blog b, t_blog_tags bt
+        where b.published = 1
+          and b.id = bt.blog_id
+          and t.id = bt.tag_id
+    </select>
+</mapper>

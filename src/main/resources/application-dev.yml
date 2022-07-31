@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    username: 你的用户名
+    password: 你的密码
+    url: jdbc:mysql://localhost:3306/text?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+  thymeleaf:
+    cache: false
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+# mybatis config
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.kindnit.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+# 日志
+logging:
+  level:
+    root: info
+    com.kindnit: debug
+  file:
+    name: log/blog-dev.log
+#环境端口
+server:
+  port: 8080

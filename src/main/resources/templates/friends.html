@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>友人帐</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.css">
+  <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+</head>
+<body>
+
+  <!--导航-->
+  <nav th:replace="_fragments :: menu(5)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small" >
+    <div class="ui container">
+      <div class="ui inverted secondary stackable menu">
+        <h2 class="ui teal header item">Blog</h2>
+        <a href="#" class=" m-item item m-mobile-hide"><i class="home icon"></i>首页</a>
+        <a href="#" class="m-item item m-mobile-hide"><i class="idea icon"></i>分类</a>
+        <a href="#" class="active m-item item m-mobile-hide"><i class="tags icon"></i>标签</a>
+        <a href="#" class="m-item item m-mobile-hide"><i class="clone icon"></i>归档</a>
+        <a href="#" class="m-item item m-mobile-hide"><i class="info icon"></i>关于我</a>
+        <div class="right m-item item m-mobile-hide">
+          <div class="ui icon inverted transparent input m-margin-tb-tiny">
+            <input type="text" placeholder="Search....">
+            <i class="search link icon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+      <i class="sidebar icon"></i>
+    </a>
+  </nav>
+
+  <!--中间内容-->
+<div id="waypoint" class="m-margin m-padded-tb-massive animated fadeIn">
+  <div class="ui m-opacity container">
+  <!--友人帐区域-->
+  <div class="box-shadow-max">
+    <div class="ui top m-margin-top-large attached teal m-opacity segment box-shadow-max">
+      <h3 class="ui horizontal divider m-text-thin header m-teal">友人帐</h3>
+      <div class="ui m-padded-tb-large m-container-tiny">
+        <div class="ui stackable m-container-mini m-opacity grid">
+
+          <!--友人帐显示区域-->
+          <div class="m-margin-tb-tiny four wide column" th:each="friendlink : ${friendlinks}">
+            <a href="#" class="class_outer" th:href="@{${friendlink.blogaddress}}" target="_blank">
+              <div align="center">
+                <div class="friends-link">
+                  <img src="../static/images/bg.jpg" th:src="@{${friendlink.pictureaddress}}"  alt="" class="friends-link-image">
+                  <div class="m-margin-top">
+                    <h4 class="m-font-size-text-friends m-margin-tb-tiny" th:text="${friendlink.blogname}">Kindnit</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--友链指示-->
+   <div class="box-shadow-max">
+      <div class="ui top m-margin-top-small attached teal m-opacity segment box-shadow-max">
+        <div class="ui m-padded-tb-large m-container-tiny">
+            <div class="m-container animated fadeInUp">
+              <!--ui提供的container:提供的宽度固定-->
+              <div class="ui container">
+                <!--grid:分成16份、stackable:可堆叠,屏幕小的时候会堆叠到一块,用于适应移动端网页适配-->
+                <div class="ui stackable grid">
+
+                  <!--左边规则列表-->
+                  <div class="eight wide column">
+                    <!--分类-->
+                    <!--segments:复数，多个segment-->
+                    <div class="ui segments">
+                      <!--secondary:加一个灰色类似于背景颜色-->
+                      <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                          <div class="column m-text-thin">
+                            <!--idea icon:图标-->
+                            友链规则
+                          </div>
+                        </div>
+                      </div>
+                      <!--teal:segment加一根有颜色的线-->
+                      <div class="ui teal segment">
+                        <!--vertical menu:竖着的菜单、fluid:填充到外层容器（刚开始没填充满）-->
+                        <div class="ui fluid vertical m-text">
+                          <ui class="list">
+                            <div class="m-margin-tb-tiny" style="font-size: large;font-weight: bold">网站要求</div>
+                            <br>
+                            <li class="m-margin-tb-tiny">无色情内容，无政治敏感内容，网站要能长期正常访问</li>
+                            <li class="m-margin-tb-tiny">二十篇以上个人原创文章，两个月内有新文章更新</li>
+                            <li class="m-margin-tb-tiny">原创博客、技术博客、游记博客优先</li>
+                            <li class="m-margin-tb-tiny">需要交换友链，先把本站添加到你的网站中，然后根据下面的格式，给我发email或在留言板给我留言~</li>
+                          </ui>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <!--右边示例-->
+                  <div class="eight wide column">
+                    <!--分类-->
+                    <!--segments:复数，多个segment-->
+                    <div class="ui segments">
+                      <!--secondary:加一个灰色类似于背景颜色-->
+                      <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                          <div class="column m-text-thin">
+                            <!--idea icon:图标-->
+                              申请格式
+                          </div>
+                        </div>
+                      </div>
+                      <!--teal:segment加一根有颜色的线-->
+                      <div class="ui teal segment">
+                        <!--vertical menu:竖着的菜单、fluid:填充到外层容器（刚开始没填充满）-->
+                        <div class="ui fluid vertical m-text">
+                          <ui class="list">
+                            <div class="m-margin-tb-tiny"style="font-size: large;font-weight: bold">申请格式</div>
+                            <br>
+                            <li class="m-margin-tb-tiny">博客标题：Kindnitの客栈</li>
+                            <li class="m-margin-tb-tiny">博客地址：没上线捏</li>
+                            <li class="m-margin-tb-tiny">图片地址：没上线捏</li>
+                          </ui>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+
+  <!--右侧工具栏-->
+  <div id="toolbar" class="m-padded topButton m-fixed m-right-bottom" style="display: none">
+    <div class="ui vertical icon buttons ">
+      <!--chevron up：向上的小图片-->
+      <div id="toTop-button" class="ui icon button" ><i class="chevron up icon"></i></div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <!--底部footer-->
+  <footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+      <div class="ui inverted divided stackable grid">
+        <div class="three wide column">
+          <div class="ui inverted link list">
+            <div class="item">
+              <img src="../static/images/wechat.jpg" class="ui rounded image" alt="" style="width: 110px">
+            </div>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header m-text-thin m-text-spaced " >最新博客</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+            <a href="#" class="item m-text-thin">用户故事（User Story）</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+          <div class="ui inverted link list">
+            <a href="#" class="item m-text-thin">Email：someone@163.com</a>
+            <a href="#" class="item m-text-thin">QQ：10086</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
+          <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客、会分享关于编程、写作、思考相关的任何内容，希望可以给来到这儿的人有所帮助...</p>
+        </div>
+      </div>
+      <div class="ui inverted section divider"></div>
+      <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright © 2022 - 2023 Kindnit Designed by Kindnit</p>
+    </div>
+
+  </footer>
+
+  <!--通过CDN引入Semantic-UI(也可通过本地下载引入)-->
+  <!--/*/<th:block th:replace="_fragments :: script">/*/-->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.2.2/dist/semantic.min.js"></script>
+  <!--/*/</th:block>/*/-->
+
+  <script>
+    //<!--jQuery获取这个元素-->
+    $('.menu.toggle').click(function () {//toggleClass开关一样的样式
+      $('.m-item').toggleClass('m-mobile-hide');//m-item:获取那几个列表，点击的时候处理m-mobile-hide
+    });
+    //<!--jQuery:按钮之后触发，执行JS组件-->
+    // $('#payButton').popup({         //获得按钮、.popup:没有为什么，调用组件
+    //     popup : $('.payQR.popup'),  //拿到二维码对象，定位到这个元素
+    //     //on : 'click',               //点击的时候触发
+    //     position: 'bottom center'   //position位置：在中下的位置触发
+    // });
+    //滚动侦测JS，根据滚动的位置显示
+    var waypoint = new Waypoint({
+      element: document.getElementById('waypoint'),   //监测对象
+      handler: function(direction) {                  //当滚动的时候触发；direction；方向，模板里直接用
+        if (direction == 'down') {                  //(direction == 'down')向下滚动；control里可以看
+          $('#toolbar').show(100);
+        } else {
+          $('#toolbar').hide(500);
+        }
+        console.log('Scrolled to waypoint!  ' + direction);
+      }
+    })
+    //点击的时候调用平滑滚动里的方法
+    $('#toTop-button').click(function () {
+      $(window).scrollTo(0,500);      //0最顶端，500速度
+    });
+  </script>
+</body>
+</html>

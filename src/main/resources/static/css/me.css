@@ -1,0 +1,275 @@
+@charset "UTF-8";
+
+/*定义背景*/
+body{
+    background: url("../images/background.png") !important;
+    /*font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;*/
+    /*font-size: 14px;*/
+    /*line-height: 1.4285em;*/
+    /*color: rgba(0,0,0,.87);*/
+}
+/*背景透明*/
+.m-bg {
+    background-color: hsla(0, 0%, 100%, .001) !important;
+}
+
+/*导航栏样式*/
+.gird-header {
+    width: 100%;
+    min-height: 60px;
+    opacity: 0.5;
+    position: fixed;
+    background-color: rgba(0,0,0,1);
+    z-index: 11002;
+    top: 0;
+    left: 0;
+    /*border-bottom: 1px solid #e8e9e7;*/
+    font-size: 15px;
+}
+
+/*字体颜色*/
+.m-black {
+    color: #000000 !important;
+}
+/*上下左右间距小一点；对内部的间距*/
+.m-padded-mini {
+    padding: 0.2em !important;
+}
+
+.m-padded-tiny {
+    padding: 0.3em !important;
+}
+.m-padded {
+    padding: 1em !important;
+}
+.m-padded-tb-mini {
+    padding-top: 0.2em !important;
+    padding-bottom: 0.2em !important;
+}
+.m-padded-tb-tiny {
+    padding-top: 0.3em !important;
+    padding-bottom: 0.3em !important;
+}
+.m-padded-tb-small {
+    padding-top: 0.5em !important;
+    padding-bottom: 0.5em !important;
+}
+.m-padded-tb {
+    padding-top: 1em !important;
+    padding-bottom: 1em !important;
+}
+.m-padded-tb-large {
+    padding-top: 2em !important;
+    padding-bottom: 2em !important;
+}
+.m-padded-tb-big {
+    padding-top: 3em !important;
+    padding-bottom: 3em !important;
+}
+.m-padded-tb-huge {
+    padding-top: 4em !important;
+    padding-bottom: 4em !important;
+}
+.m-padded-tb-massive {
+    padding-top: 5em !important;
+    padding-bottom: 5em !important;
+}
+
+.m-padded-tb-super {
+    padding-top: 6em !important;
+    padding-bottom: 6em !important;
+}
+
+/*----blog页面的content间距----*/
+.m-padded-lr-responsive {
+    padding-left: 4em !important;
+    padding-right: 4em !important;
+}
+
+/*-------text:字体 -----*/
+
+.m-text {
+    font-weight: 300 !important;    /*细一点*/
+    letter-spacing: 1px !important; /*一个像素间距*/
+    line-height: 1.8;               /*行间距放大*/
+}
+.m-text-thin {
+    font-weight: 300 !important;    /*字细一点*/
+}
+
+/*字间距*/
+.m-text-spaced {
+    letter-spacing: 1px !important; /*一个像素间距*/
+}
+.m-text-lined {
+    line-height: 1.8;               /*行间距放大*/
+}
+
+/*-----margin对外部的间距：上下间隔------*/
+
+.m-margin-top-small {
+    margin-top:0.5em !important;
+}
+.m-margin-top {
+    margin-top: 1em !important;
+}
+.m-margin-top-large {
+    margin-top: 2em !important;
+}
+
+.m-margin-tb-tiny {
+    margin-top: 0.3em !important;
+    margin-bottom: 0.3em !important;
+}
+
+.m-margin-bottom-small {
+    margin-bottom: 0.5em !important;
+
+}
+
+/*-----opacity:透明度------*/
+
+.m-opacity {
+    opacity: 0.9 !important;
+}
+.m-opacity-mini {
+    opacity: 0.8 !important;
+}
+.m-opacity-tiny {
+    opacity: 0.6 !important;
+}
+
+/*------position：绝对位置布局---*/
+
+.m-right-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.m-fixed {
+    position: fixed !important;
+    z-index: 15 !important;  /*浮动在最上层*/
+}
+
+.m-right-bottom {
+    bottom: 0 !important;   /*靠右靠底部*/
+    right: 0 !important;
+}
+
+.m-right-center {
+    bottom: 45% !important;   /*靠右靠中间*/
+    right: 0 !important;
+}
+
+/*------display------*/
+/*像浮动一样，换行，消除块元素*/
+.m-inline-block {
+    display: inline-block !important;
+}
+
+/*-----自己定义的container-----*/
+
+.m-container {
+    max-width: 72em !important;
+    margin: auto !important;    /*水平方向居中*/
+}
+.m-container-small {
+    max-width: 60em !important;
+    margin: auto !important;    /*水平方向居中*/
+}
+
+/*------shadow:定义导航下的阴影------*/
+.m-shadow-small {
+    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;   /*webkit：为了适配一些浏览器*/
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;           /*4左右,8虚幻的范围，000黑色，透明度0.2*/
+}
+
+/*-----color：自己定义的颜色-----*/
+.m-black {
+    color: #333 !important;
+}
+
+.m-teal {
+    color: #00B5AD !important;
+}
+
+.m-mobile-show {
+    display: none !important;
+}
+
+/*-----box：友人帐盒子-----*/
+
+.box-shadow-max{
+    margin-bottom: 15px;
+    border-radius: 2px;
+    background-color: #fff;
+    box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, .05);
+    -webkit-box-shadow: #000000 0px 0px 10px;
+    -moz-box-shadow: #000000 0px 0px 10px;
+}
+
+.friends-link{
+    width: 160px;
+    height: 220px;
+    border: 1px solid #999;
+    box-shadow: 5px 5px 5px #999;
+    border-radius:8px;
+}
+
+.friends-link-image{
+    width: 160px;
+    height: 170px;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.m-font-size-text-friends{
+    font-size: 16px;
+    color: #000000;
+    font-family: STSong;
+}
+
+.m-margin-left-mini{
+    margin-left:4em !important;
+}
+
+.m-margin-left-big{
+    margin-left:8em !important;
+}
+
+/*遮罩层*/
+.class_outer {
+    display: block;
+    /*width: 550px;*/
+    /*height: 276px;*/
+    margin: 10px auto 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/*-----opacity------*/
+.m-opacity {
+    opacity: 0.9 !important;
+}
+
+
+/*----手机端的时候隐藏按钮-----*/
+@media screen and (max-width: 768px){   /*----屏幕小于768px做这个事情----*/
+    .m-mobile-hide {
+        display: none !important;       /*----屏幕小于768px的时候隐藏掉----*/
+    }
+    .m-mobile-show {
+        display: block !important;      /*----宽屏的时候按钮出来----*/
+    }
+    .m-padded-lr-responsive {           /*BLOG页面中内容：响应式的，在手机端的时候响应页面大小*/
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .m-mobile-lr-clear {                /*小屏幕的时候清除，不用上面那个是有大尺寸的时候的情况*/
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .m-mobile-wide {                    /*BLOG页面中内容：姓名邮箱发布在移动端撑满外部容器*/
+        width: 100% !important;
+    }
+}
